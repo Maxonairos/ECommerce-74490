@@ -33,9 +33,20 @@ const NavBar = () => {
       </div>
       <div className="sm:hidden" id="mobile-menu">
         <div className="space-y-1 px-2 pb-3 pt-2">
-          <a href="#" className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Home</a>
-          <a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-gray-500 hover:bg-gray-700 hover:text-white">Productos</a>
-          <a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-gray-500 hover:bg-gray-700 hover:text-white">Carrito</a>
+        <ul>
+                <li className="flex">
+                  <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-3 py-2 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/" >Home</NavLink>
+                </li>
+                <li className="flex">
+                  <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-3 py-2 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/categoria/monitores">Monitores</NavLink>
+                </li>
+                <li className="flex">
+                <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-3 py-2 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/categoria/perifericos">Periféricos</NavLink>
+                </li>
+                <li className="flex">
+                <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-3 py-2 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/categoria/escritorio">PC´s de Escritorio</NavLink>
+                </li>
+              </ul>
         </div>
       </div>
     </nav>
