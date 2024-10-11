@@ -87,7 +87,7 @@ const getProducts = () => {
     if (condicion) {
       setTimeout(() => {
         resolve(products);
-      }, 1000);
+      }, 3000);
     }
   });
 };
@@ -97,7 +97,7 @@ const getProduct = (idProduct)=>{
     setTimeout(()=>{
       const product = products.find ((product)=> product.id === parseInt(idProduct))
       resolve(product)
-    }, 1000)
+    }, 3000)
   })
 }
 
