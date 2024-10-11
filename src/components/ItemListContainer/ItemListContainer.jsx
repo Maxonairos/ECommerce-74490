@@ -1,12 +1,12 @@
 import { useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useState, useEffect } from "react"
 import { getProducts } from "../../data/data.js"
 import Loading from "../Loading.jsx"
 import ItemList from "../ItemList.jsx"
 
 const ItemListContainer = ( { greeting }) => {
-const [products, setProducts] = useState([])
-const { idCategory } = useParams()
+  const [products, setProducts] = useState([])
+  const { idCategory } = useParams()
 
 
 useEffect(()=>{
@@ -15,6 +15,8 @@ useEffect(()=>{
     if(idCategory){
       const filterProducts = data.filter ((product)=> product.categoria === idCategory)
       setProducts(filterProducts)
+    } else {
+      setProducts(data)
     }
     
   })
@@ -28,17 +30,11 @@ useEffect(()=>{
 
 
   return (
-    <div>
-        <h1>{greeting}</h1>
-        {
-          Loading === true ? 
-          <Loading/>
-          :
-          <ItemList products={products} />
-        }
-
-        
+    <div className="flex flex-wrap mx-auto max-w-8xl px-2 sm:px-6 lg:px-8 items-center justify-evenly sm:items-stretch sm:justify-center">
+        <h1 className="mb-2 text-xl font-normal tracking-tight text-gray-600 dark:text-white">{greeting}</h1>
+        <ItemList products={products}/>
     </div>
+    
   )
 }
 
