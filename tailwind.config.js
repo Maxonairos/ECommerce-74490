@@ -8,6 +8,7 @@ export default {
     extend: {
       colors: {
         'success-subtle': '#d1e7dd',
+        'seagreen':'#00916E',
       },
     },
   },

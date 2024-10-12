@@ -1,9 +1,18 @@
 import { useState } from "react"
+import Swal from "sweetalert2"
 
 const ItemDetail = ( {product} ) => {
   const [currentImage , setCurrentImage ] = useState(product.img[0])
 
   const images = product.img.filter ( (imagen) => imagen !== currentImage )
+
+  let toast =()=>{
+    Swal.fire({
+      icon: "info",
+      title: "Funcionalidad en desarrollo, vuelve más tarde!!!",
+      confirmButtonColor: "#00916E"
+    })
+  }
 
   return (
     <div className='main flex justify-center max-w-9xl'>
@@ -23,7 +32,7 @@ const ItemDetail = ( {product} ) => {
         <p className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>Precio: {product.precio}$ ARS</p>
         <p className='mb-3 font-normal text-gray-700 dark:text-gray-400'>Descripción: {product.descripcion}</p>
         <p className='mb-3 font-normal text-gray-700 dark:text-gray-400'>Stock: {product.cantidad} Unidades</p>
-        <button className="inline-flex items-end px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Agregar al carrito</button>
+        <button className="inline-flex items-end px-3 py-2 text-sm font-medium text-center text-white bg-seagreen rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" onClick={toast}>Agregar al carrito</button>
 
       </div>
     </div>

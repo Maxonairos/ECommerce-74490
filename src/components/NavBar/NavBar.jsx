@@ -1,8 +1,10 @@
 import logo from "../../assets/logo.png"
 import CartWidget from "./CartWidget"
-import { Link, NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom"
+import Swal from "sweetalert2"
 
 const NavBar = () => {
+
   return (
     <nav className="bg-success-subtle">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
