@@ -11,6 +11,8 @@ const ItemListContainer = ( { greeting }) => {
 
 
 useEffect(()=>{
+  setLoading(true)
+  
   getProducts()
   .then((data)=> {
     if(idCategory){

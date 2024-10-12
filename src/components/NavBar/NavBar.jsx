@@ -17,13 +17,16 @@ const NavBar = () => {
                   <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-3 py-2 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/" >Home</NavLink>
                 </li>
                 <li className="flex">
-                  <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-3 py-2 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/categoria/monitores">Monitores</NavLink>
+                  <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-3 py-2 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/categoria/Monitores">Monitores</NavLink>
                 </li>
                 <li className="flex">
-                <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-3 py-2 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/categoria/perifericos">Periféricos</NavLink>
+                <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-3 py-2 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/categoria/Perifericos">Periféricos</NavLink>
                 </li>
                 <li className="flex">
-                <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-3 py-2 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/categoria/escritorio">PC´s de Escritorio</NavLink>
+                <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-3 py-2 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/categoria/Gamer">PC´s Gamer</NavLink>
+                </li>
+                <li className="flex">
+                <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-3 py-2 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/categoria/Notebooks">Notebooks</NavLink>
                 </li>
                 <CartWidget/> 1
               </ul>
@@ -38,13 +41,16 @@ const NavBar = () => {
                   <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-3 py-2 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/" >Home</NavLink>
                 </li>
                 <li className="flex">
-                  <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-3 py-2 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/categoria/monitores">Monitores</NavLink>
+                  <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-3 py-2 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/categoria/Monitores">Monitores</NavLink>
                 </li>
                 <li className="flex">
-                <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-3 py-2 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/categoria/perifericos">Periféricos</NavLink>
+                <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-3 py-2 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/categoria/Perifericos">Periféricos</NavLink>
                 </li>
                 <li className="flex">
-                <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-3 py-2 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/categoria/escritorio">PC´s de Escritorio</NavLink>
+                <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-3 py-2 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/categoria/Gamer">PC´s Gamer</NavLink>
+                </li>
+                <li className="flex">
+                <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-3 py-2 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/categoria/Notebooks">Notebooks</NavLink>
                 </li>
               </ul>
         </div>
