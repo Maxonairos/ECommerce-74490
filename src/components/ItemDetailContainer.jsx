@@ -3,6 +3,7 @@ import { getProduct } from "../data/data"
 import ItemDetail from "./ItemDetail"
 import { useParams } from "react-router-dom"
 import Loading from "./Loading"
+import { getProductApi } from "../utils/fetchApi"
 
 const ItemDetailContainer = () => {
     const [product, setProduct] = useState ({})
@@ -12,14 +13,15 @@ const ItemDetailContainer = () => {
     useEffect ( ()=>{
         setLoading(true)
 
-        getProduct(idProduct)
+        getProductApi(idProduct)
         .then((data)=> setProduct(data))
+        .catch((error) => console.error(error))
         .finally(()=>{
           setLoading(false)
         })
     }, [idProduct])
 
-    console.log(product)
+    //console.log(product)
   return (
     <>
       {
