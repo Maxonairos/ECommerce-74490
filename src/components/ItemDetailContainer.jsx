@@ -1,15 +1,21 @@
-import { useState, useEffect } from "react"
-import { getProduct } from "../data/data"
-import ItemDetail from "./ItemDetail"
+import { useState, useEffect, useContext } from "react"
 import { useParams } from "react-router-dom"
 import Loading from "./Loading"
 import { getProductApi } from "../utils/fetchApi"
+import { CartContext } from "../context/CartContext"
+import ItemDetail from "./ItemDetail"
 
 const ItemDetailContainer = () => {
     const [product, setProduct] = useState ({})
     const [loading, setLoading] = useState(true)
+    const { addProductInCart } = useContext(CartContext)
     const { idProduct } = useParams()
 
+    const addProduct = (count)=> {
+      const productCart = {...product, quantity : count}
+
+      addProductInCart(productCart)
+    }
     useEffect ( ()=>{
         setLoading(true)
 
@@ -28,7 +34,7 @@ const ItemDetailContainer = () => {
         loading ? <Loading/>
         :
         
-        <ItemDetail product={product}/>
+        <ItemDetail product={product} addProduct={addProduct}/>
       }
     </>
     

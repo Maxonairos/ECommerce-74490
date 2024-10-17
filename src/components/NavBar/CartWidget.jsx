@@ -1,19 +1,17 @@
 import { FaShoppingCart } from "react-icons/fa";
-import Swal from "sweetalert2";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
+
 
 const CartWidget = () => {
-  let infoToast =()=>{
-    Swal.fire({
-      icon: "info",
-      title: "Página en desarrollo, vuelve más tarde!!!",
-      confirmButtonColor: "#00916E"
-    })
-  }
+  const { totalQuantity } = useContext(CartContext)
 
   return (
-    <button className="cartwidget bg-success-subtle hover:bg-gray-700 rounded-md px-2" onClick={infoToast}>
-        <FaShoppingCart size={30} color="gray"/>
-    </button>
+    
+    <div className="inline-flex items-center">
+        <FaShoppingCart size={25} color="gray"/>
+        <div className="inline-flex items-center rounded-md bg-success-subtle px-1 py-1 text-xs font-medium text-black-700 ring-1 ring-inset ring-green-700/20">{totalQuantity()}</div>
+    </div>
   )
 }
 
