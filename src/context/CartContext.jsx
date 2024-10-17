@@ -9,7 +9,9 @@ const CartProvider = ({children})=>{
         Swal.fire({
             icon: "success",
             title: "Producto/s Agregado al Carrito",
-            confirmButtonColor: "#00916E"
+            showConfirmButton: false,
+            confirmButtonColor: "#00916E",
+            timer: 1500
         })
     }
 

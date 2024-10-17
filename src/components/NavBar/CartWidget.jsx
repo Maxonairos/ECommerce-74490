@@ -9,8 +9,8 @@ const CartWidget = () => {
   return (
     
     <div className="inline-flex items-center">
-        <FaShoppingCart size={25} color="gray"/>
-        <div className="inline-flex items-center rounded-md bg-success-subtle px-1 py-1 text-xs font-medium text-black-700 ring-1 ring-inset ring-green-700/20">{totalQuantity()}</div>
+        <FaShoppingCart size={25} color="grey"/>
+        <div className="inline-flex items-center rounded-md bg-white px-1 py-1 text-sm font-black text-black-700 ring-1 ring-inset ring-white-900">{totalQuantity()}</div>
     </div>
   )
 }

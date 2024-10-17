@@ -5,9 +5,7 @@ const ItemDetail = ({ product , addProduct }  ) => {
   const [currentImage , setCurrentImage ] = useState(product.img[0])
 
   const images = product.img.filter ( (imagen) => imagen !== currentImage )
-
   
-
   return (
     <div className='main flex justify-center max-w-9xl'>
       <div className="justify-center m-3 p-2 max-w-4xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
