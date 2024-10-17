@@ -14,7 +14,7 @@ const ItemDetailContainer = () => {
     const addProduct = (count)=> {
       const productCart = {...product, quantity : count}
 
-      addProductInCart(productCart)
+      addProductInCart(productCart , count)
     }
     useEffect ( ()=>{
         setLoading(true)

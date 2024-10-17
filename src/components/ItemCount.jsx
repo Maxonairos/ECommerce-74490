@@ -32,9 +32,9 @@ export const ItemCount = ({stock, addProduct}) => {
     <div className="w-40 flex-col justify-center rounded-xl bg-grey border">
       <div className='flex justify-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white underline underline-offset-4'>Cantidad</div>
       <div className="flex justify-center py-2">
-        <button className="inline-flex justify-center px-3 py-2 text-sm font-medium text-center text-white bg-seagreen rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" onClick={handleClickDecrement}>-</button>
+        <button className="inline-flex justify-center px-3 py-3 text-sm font-medium text-center text-white bg-seagreen rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" onClick={handleClickDecrement}>-</button>
         <p className="inline-flex px-8 py-2 justify-center rounded-xl bg-grey border text-justify font-bold">{count}</p>
-        <button className="inline-flex items-end px-3 py-2 text-sm font-medium text-center text-white bg-seagreen rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" onClick={handleClickIncrement}>+</button>
+        <button className="inline-flex items-end px-3 py-3 text-sm font-medium text-center text-white bg-seagreen rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" onClick={handleClickIncrement}>+</button>
         </div>
       
       <div className="flex py-2 justify-center">

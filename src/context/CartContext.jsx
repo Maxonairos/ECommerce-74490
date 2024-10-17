@@ -5,20 +5,36 @@ const CartContext = createContext()
 
 const CartProvider = ({children})=>{
 
+
+    let mensajeToast = ""
+    let mensaje1 = "Producto Agregado al Carrito"
+    let mensaje2 = "Productos Agregados al Carrito"
+
+    const setearMensaje = (count)=>{
+        if (count > 1){
+            mensajeToast = `${count} ${mensaje2}`
+        } else {
+            mensajeToast = `${count} ${mensaje1}`
+        }
+
+    }
+
     let toast =()=>{
         Swal.fire({
             icon: "success",
-            title: "Producto/s Agregado al Carrito",
+            title: `${mensajeToast}`,
             showConfirmButton: false,
             confirmButtonColor: "#00916E",
-            timer: 1500
+            timer: 2000,
+            timerProgressBar: true
         })
     }
 
     const [ cart, setCart ] = useState([])
 
-    const addProductInCart = (newProduct)=>{
+    const addProductInCart = (newProduct, count)=>{
     setCart([...cart, newProduct]),
+    setearMensaje(count),
     toast()
     }
 
