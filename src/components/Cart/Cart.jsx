@@ -50,7 +50,7 @@ const Cart = () => {
             }
             <div>
                 {
-                    cart==0 ? <CartEmpty/>
+                    cart ==0 ? <CartEmpty/>
                     : 
                     <CartResume/>
                 }

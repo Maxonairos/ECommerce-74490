@@ -10,7 +10,7 @@ const CartProvider = ({children})=>{
     let mensaje1 = "Producto Agregado al Carrito"
     let mensaje2 = "Productos Agregados al Carrito"
 
-    const setearMensaje = (count)=>{
+    const setMessageToast = (count)=>{
         if (count > 1){
             mensajeToast = `${count} ${mensaje2}`
         } else {
@@ -19,7 +19,7 @@ const CartProvider = ({children})=>{
 
     }
 
-    let toast =()=>{
+    let addProductToast =()=>{
         Swal.fire({
             icon: "success",
             title: `${mensajeToast}`,
@@ -30,14 +30,45 @@ const CartProvider = ({children})=>{
         })
     }
 
-    const [ cart, setCart ] = useState([])
-
-    const addProductInCart = (newProduct, count)=>{
-    setCart([...cart, newProduct]),
-    setearMensaje(count),
-    toast()
+    let stockLimitToast = ()=>{
+        Swal.fire({
+            icon: "warning",
+            title: "Superaste el limite de stock por este producto",
+            confirmButtonColor: "#00916E"
+        })
     }
 
+    const [ cart, setCart ] = useState([])
+
+    const addProductInCart = (newProduct, count) => {
+        setMessageToast(count)
+        console.log(cart)
+        if (isInCart(newProduct.id)) {
+                const checkCart = cart.map(cartProduct => {
+                    if (cartProduct.id == newProduct.id) {
+                        const nuevaCantidad = cartProduct.quantity + count
+                        
+                        if (nuevaCantidad > newProduct.cantidad){
+                            console.log("se supera el stock")
+                            stockLimitToast()
+                            return cartProduct
+                            }
+                            addProductToast()
+                        return {...cartProduct, quantity: nuevaCantidad }
+                        }
+                return cartProduct
+                })
+                setCart(checkCart)
+                                
+            } else {
+                setCart([...cart, newProduct]);
+                addProductToast()
+                
+        }
+        
+        
+    }
+    
     const deleteProductInCart = (idProduct) => {
         const productsFilter = cart.filter((productCart)=> productCart.id !== idProduct )
         setCart(productsFilter)
@@ -47,11 +78,6 @@ const CartProvider = ({children})=>{
     const quantity = cart.reduce( (total, productCart)=> total + productCart.quantity, 0 )
         return quantity
     }
-
-    //const isInCart = ()=>{
-    //    const   some()
-    //}
-
     
     const totalPriceCart = ()=>{
         const price = cart.reduce((total, productCart) => total + (productCart.precio * productCart.quantity), 0)
@@ -61,14 +87,19 @@ const CartProvider = ({children})=>{
     const deleteCart = ()=>{
         setCart([])
     }
+    const isInCart = (idProduct)=>{
+        const checkCart = cart.some(CartProduct => CartProduct.id === idProduct)
+        //console.log("esta en el carrito: ",checkCart)
+        return checkCart
+        
+    }
 
 
     return(
-        <CartContext.Provider value={ { cart, addProductInCart, totalQuantity, totalPriceCart, deleteProductInCart, deleteCart, toast } }>
+        <CartContext.Provider value={ { cart, addProductInCart, totalQuantity, totalPriceCart, deleteProductInCart, deleteCart, setMessageToast, isInCart } }>
             {children}
         </CartContext.Provider>
     )
-
 }
 
 export { CartContext, CartProvider }
