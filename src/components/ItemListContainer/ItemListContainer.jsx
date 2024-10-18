@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import Loading from "../Loading.jsx"
 import ItemList from "../ItemList.jsx"
-import { getProductsApi } from "../../utils/fetchApi.js"
+import { getProducts } from "../../data/data.js"
 
 const ItemListContainer = ( { greeting }) => {
   const [products, setProducts] = useState([])
@@ -13,7 +13,7 @@ const ItemListContainer = ( { greeting }) => {
 useEffect(()=>{
   setLoading(true)
   
-  getProductsApi()
+  getProducts()
   .then((data)=> {
     if(idCategory){
       const filterProducts = data.filter ((product)=> product.categoria === idCategory)

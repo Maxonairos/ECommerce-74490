@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react"
 import { useParams } from "react-router-dom"
 import Loading from "./Loading"
-import { getProductApi } from "../utils/fetchApi"
+import { getProduct } from "../data/data.js"
 import { CartContext } from "../context/CartContext"
 import ItemDetail from "./ItemDetail"
 
@@ -19,7 +19,7 @@ const ItemDetailContainer = () => {
     useEffect ( ()=>{
         setLoading(true)
 
-        getProductApi(idProduct)
+        getProduct(idProduct)
         .then((data)=> setProduct(data))
         .catch((error) => console.error(error))
         .finally(()=>{
