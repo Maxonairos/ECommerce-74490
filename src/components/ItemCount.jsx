@@ -26,7 +26,8 @@ export const ItemCount = ({stock, addProduct}) => {
   }
 
   return (
-    <div className="w-48 flex-col justify-center rounded-xl bg-grey border">
+    <div className="flex self-center justify-center">
+      <div className="w-60 flex-col justify-center rounded-xl bg-grey border">
       <div className='flex justify-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white underline underline-offset-4'>Cantidad</div>
       <div className="flex justify-center py-2">
         <button className="inline-flex justify-center px-2 py-2 text-sm font-medium text-center text-white bg-seagreen rounded-xl hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" onClick={handleClickDecrement}>{<FaCircleMinus size={30}/>}</button>
@@ -39,6 +40,8 @@ export const ItemCount = ({stock, addProduct}) => {
       </div>
       
     </div>
+    </div>
+    
   )
 }
 

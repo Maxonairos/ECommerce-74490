@@ -34,6 +34,7 @@ const CartProvider = ({children})=>{
         Swal.fire({
             icon: "warning",
             title: "Superaste el limite de stock por este producto",
+            text: "verifica si ya tienes productos en el carrito o si estas intentando agregar mas de lo tenemos en este momento😀",
             confirmButtonColor: "#00916E"
         })
     }
