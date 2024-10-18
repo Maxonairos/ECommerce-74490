@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
-import { getProducts } from "../../data/data.js"
 import Loading from "../Loading.jsx"
 import ItemList from "../ItemList.jsx"
 import { getProductsApi } from "../../utils/fetchApi.js"

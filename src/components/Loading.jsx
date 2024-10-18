@@ -1,4 +1,4 @@
-import { BounceLoader, PacmanLoader } from "react-spinners"
+import { PacmanLoader } from "react-spinners"
 
 const Loading = () => {
   return (

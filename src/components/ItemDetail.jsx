@@ -11,7 +11,7 @@ const ItemDetail = ({ product , addProduct }  ) => {
       <div className="justify-center m-3 p-2 max-w-4xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <h2 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white underline underline-offset-4'>{product.nombre}</h2>
               <div className="justify-center flex">
-          <img className="object-contain h-96 w-auto bg-grey border" src={currentImage} alt="Imagen de producto" />
+          <img className="object-contain h-96 w-auto bg-grey border hover:scale-102 transition delay-100 duration-200 ease-in-out" src={currentImage} alt="Imagen de producto" />
         </div>
         <div className="justify-center flex flex-wrap">
           {

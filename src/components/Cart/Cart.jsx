@@ -1,11 +1,14 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { CartContext } from "../../context/CartContext"
 import { FaDeleteLeft } from "react-icons/fa6"
 import { Link } from "react-router-dom"
+import CartResume from "./CartResume"
 
 
 const Cart = () => {
-const { cart, totalPrice, totalQuantity, deleteProductInCart, deleteCart } = useContext(CartContext)
+    const { cart, deleteProductInCart } = useContext(CartContext)
+    const [isEmpty, setIsEmpty] = useState(true)
+    
     return (
         <div className="flex flex-wrap justify-center ">
             
@@ -13,7 +16,7 @@ const { cart, totalPrice, totalQuantity, deleteProductInCart, deleteCart } = use
             <h1 className='flex flex-wrap self-center mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white'>Mi Carrito</h1>
             {
                 cart.map((productCart)=>(
-                    <div className="grid gap-4 grid-cols-6 justify-center m-3 p-2 max-w-6xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-70" key={productCart.id}>
+                    <div className="grid gap-4 grid-cols-6 justify-center m-3 p-2 max-w-6xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-70 hover:scale-101 transition delay-100 duration-200 ease-in-out" key={productCart.id}>
                         <Link to={`/detalle/${productCart.id}`}>
                         <img className="flex m-1 bg-grey border hover:opacity-50 rounded-md object-contain h-48 w-48 sm:object-scale-down" src={productCart.img[0]} alt="Imagen Producto" />
                         </Link>
@@ -27,9 +30,14 @@ const { cart, totalPrice, totalQuantity, deleteProductInCart, deleteCart } = use
                 ))
             }
             <div>
-                <p>Precio Total: {totalPrice()} ARS</p>
-                <button onClick={deleteCart} >Vaciar Carrito</button>
+                {
+                    cart==0 ? <div>Carrito Vacio</div>
+                    : 
+                    <CartResume/>
+                }
+                
             </div>
+            
             </div>
         </div>
     )
