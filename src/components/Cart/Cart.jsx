@@ -31,7 +31,7 @@ const Cart = () => {
             }
             <div>
                 {
-                    cart==0 ? <div>Carrito Vacio</div>
+                    cart==0 ? <div className="m-3 p-2 max-w-6xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-70 ">Carrito Vacio</div>
                     : 
                     <CartResume/>
                 }
