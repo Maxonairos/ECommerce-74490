@@ -21,7 +21,7 @@ export const ItemCount = ({stock, addProduct}) => {
   }
 
   const handleClickAdd = ()=>{ 
-    addProduct(count);
+    addProduct(count)
     setCount(1)
   }
 

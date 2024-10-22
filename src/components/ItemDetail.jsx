@@ -1,7 +1,8 @@
 import { useState } from "react"
 import ItemCount from "./ItemCount.jsx"
+import ItemFinishBuy from "./itemFinishBuy.jsx"
 
-const ItemDetail = ({ product , addProduct }  ) => {
+const ItemDetail = ({ product , addProduct, hideItemCount , removeButtonFinishBuy}  ) => {
   const [currentImage , setCurrentImage ] = useState(product.img[0])
 
   const images = product.img.filter ( (imagen) => imagen !== currentImage )
@@ -23,7 +24,14 @@ const ItemDetail = ({ product , addProduct }  ) => {
         <p className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>Precio: {product.precio}$ ARS</p>
         <p className='mb-3 font-normal text-gray-700 dark:text-gray-400'>Descripción: {product.descripcion}</p>
         <p className='mb-3 font-normal text-gray-700 dark:text-gray-400'>Stock: {product.cantidad} Unidades</p>
-        <ItemCount stock={product.cantidad} addProduct={addProduct}/>
+        {
+          hideItemCount === true ? 
+            <ItemFinishBuy removeButtonFinishBuy={removeButtonFinishBuy}/>
+            : 
+            <ItemCount stock={product.cantidad} addProduct={addProduct}/>
+          
+        }
+        
       </div>
     </div>
   )
