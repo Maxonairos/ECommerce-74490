@@ -55,7 +55,7 @@ const NavBar = () => {
                 <li className="flex">
                 <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-3 py-2 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/categoria/Notebooks">Notebooks</NavLink>
                 </li>
-                <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-black text-black self-center": "") +" self-center rounded-md px-2 py-1 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-black"} to="/cart">Carrito {<CartWidgetMobile/>}</NavLink>
+                <NavLink className={({isActive})=>(isActive ? "bg-gray-900 font-medium text-white": "") +" rounded-md px-2 py-1 text-sm font-bold text-gray-500 hover:bg-gray-700 hover:text-white"} to="/cart">Carrito {<CartWidgetMobile/>}</NavLink>
               </ul>
         </div>
       </div>

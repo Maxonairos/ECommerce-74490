@@ -56,7 +56,7 @@ const CartProvider = ({children})=>{
                             }
                             addProductToast()
                         return {...cartProduct, quantity: nuevaCantidad }
-                        }
+                        }  
                 return cartProduct
                 })
                 setCart(checkCart)
