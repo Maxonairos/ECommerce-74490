@@ -21,12 +21,31 @@ const CartResume = () => {
             }
         })
     }
+    const modalInProgress = ()=>{
+        Swal.fire({
+            icon: "warning",
+            title: "Funcionalidad en Desarrollo",
+            text: "En breve vas a poder completar tu compra.😀",
+            confirmButtonColor: "#00916E"
+            })
+    }
 
     return (
-    <div className="m-3 p-2 max-w-6xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-70 ">
-        <p className='self-center mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white'>Precio Total: {totalPriceCart()}$ ARS</p>
-        <p className='self-center mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white'>Total: {totalQuantity()} Productos</p>
-        <button className="inline-flex self-end px-3 py-2 text-sm font-medium text-center text-white bg-seagreen rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" onClick={modalWarningAll} >Vaciar Carrito</button>
+    <div className="m-2 p-2 h-36 max-w-6xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-70 ">
+        <div>
+        <h2 className='inline-flex self-center m-1 text-lg font-bold tracking-tight text-gray-900 dark:text-white'>Precio Total:</h2>
+        <div className="inline-flex self-center m-1 text-lg font-normal tracking-tight text-gray-900 dark:text-white">{totalPriceCart()}$ ARS</div>
+        </div>
+        <div>
+            <h2 className='inline-flex self-center m-1 text-lg font-bold tracking-tight text-gray-900 dark:text-white'>Total:</h2>
+            <div className='inline-flex self-center m-1 text-lg font-normal tracking-tight text-gray-900 dark:text-white'>{totalQuantity()} Productos </div>
+        </div>
+        
+        <div className="flex flex-wrap justify-evenly m-1 p-1 max-w-6xl bg-white ">
+        <button className="inline-flex self-center m-1 px-3 py-2 text-sm font-medium text-center text-white bg-seagreen rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" onClick={modalWarningAll} >Vaciar Carrito</button>
+        <button className="inline-flex self-center m-1 px-3 py-2 text-sm font-medium text-center text-white bg-seagreen rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" onClick={modalInProgress} >Finalizar mi Compra</button>
+        </div>
+        
     </div>
     )
 }

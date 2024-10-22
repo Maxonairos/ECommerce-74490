@@ -31,25 +31,33 @@ const Cart = () => {
     return (
         <div className="flex flex-wrap justify-center">
             <div className="flex flex-col w-full max-w-6xl p-4">
-                <h1 className='flex flex-wrap self-center mb-4 text-lg font-bold tracking-tight text-gray-900 dark:text-white'>
+                <h1 className='flex flex-wrap self-center mb-4 text-xl font-bold tracking-tight text-gray-700 dark:text-white'>
                     Mi Carrito
                 </h1>
                 {
                     cart.map((productCart) => (
-                        <div
-                            className="grid gap-4 grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 justify-center m-3 p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-                            key={productCart.id}
-                        >
+                        <div className="grid gap-4 grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 justify-center m-2 p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                            key={productCart.id}>
                             <Link className="flex self-center justify-center" to={`/detalle/${productCart.id}`}>
-                                <img className="flex justify-center m-1 bg-white border hover:opacity-50 rounded-md object-contain h-48 w-48 sm:object-scale-down"
+                                <img className="flex justify-center m-1 bg-white border hover:opacity-50 rounded-md object-contain h-36 w-36 sm:object-scale-down"
                                     src={productCart.img[0]}
                                     alt="Imagen Producto"/>
                             </Link>
-                            
-                            <p className='flex self-center justify-center mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white'>{productCart.nombre}</p>
-                            <p className='flex self-center justify-center mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white'>Precio: {productCart.precio}$ ARS</p>
-                            <p className='flex self-center justify-center mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white'>Cantidad: {productCart.quantity}</p>
-                            <p className='flex self-center justify-center mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white'>Precio Parcial: {productCart.precio * productCart.quantity}$ ARS</p>
+                            <div className="content-center">
+                                <h2 className='flex self-center mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white'>{productCart.nombre}</h2>
+                            </div>
+                            <div className="content-center" >
+                                <h2 className='flex self-center justify-center mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white'>Precio</h2>
+                                <p className='flex self-center justify-center mb-2 text-lg font-normal tracking-tight text-gray-900 dark:text-white'>{productCart.precio} $ ARS</p>
+                            </div>
+                            <div className="content-center">
+                                <h2 className='flex self-center justify-center mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white'>Cantidad</h2>
+                                <p className='flex self-center justify-center mb-2 text-lg font-normal tracking-tight text-gray-900 dark:text-white'>{productCart.quantity}</p>
+                            </div>
+                            <div className="content-center">
+                                <h2 className='flex self-center justify-center mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white'>Precio Parcial</h2>
+                                <p className='flex self-center justify-center mb-2 text-lg font-normal tracking-tight text-gray-900 dark:text-white'>{productCart.precio * productCart.quantity}$ ARS</p>
+                            </div>
                             <div className="flex self-center justify-center mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white'" >
                                 <FaTrash className="self-center mb-2 hover:scale-105 transition delay-100 duration-200 ease-in-out" size={30} color="seagreen" onClick={() => modalWarningProduct(productCart.id)}/>
                             </div>
