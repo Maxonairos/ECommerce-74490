@@ -25,7 +25,7 @@ const CartResume = () => {
         Swal.fire({
             icon: "warning",
             title: "Funcionalidad en Desarrollo",
-            text: "En breve vas a poder completar tu compra.😀",
+            text: "En breve vas a poder completar tu compra 😀",
             confirmButtonColor: "#00916E"
             })
     }

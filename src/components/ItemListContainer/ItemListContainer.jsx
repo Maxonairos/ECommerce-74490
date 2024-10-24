@@ -2,33 +2,54 @@ import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import Loading from "../Loading.jsx"
 import ItemList from "../ItemList.jsx"
-import { getProducts } from "../../data/data.js"
+//import { getProducts } from "../../data/data.js"
+import { collection , getDocs, query, where } from "firebase/firestore"
+import db from "../../db/db.js"
 
 const ItemListContainer = ( { greeting }) => {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const { idCategory } = useParams()
 
-
-useEffect(()=>{
-  setLoading(true)
-  
-  getProducts()
-  .then((data)=> {
-    if(idCategory){
-      const filterProducts = data.filter ((product)=> product.categoria === idCategory)
-      setProducts(filterProducts)
-    } else {
-      setProducts(data)
-    }
-    
-  })
-  .catch((error)=> {
-    console.error(error)
+  const getProducts = ()=>{
+    const collectionName = collection(db, "productos")
+    getDocs(collectionName) 
+    .then((dataDb)=>{
+      const productsDb = dataDb.docs.map((productDb)=>{
+        return { id: productDb.id, ...productDb.data() }
+        
+      })
+      setProducts(productsDb)
+      console.log(productsDb)
+    })
+    .finally(()=>{
+      setLoading(false)
+    })
+  }
+const getProductByCategory = () =>{
+  const collectionName = collection(db, "productos")
+  const q = query(collectionName, where( "categoria", "==", idCategory ))
+  getDocs(q)
+  .then((dataDb)=>{
+    const productsDb = dataDb.docs.map((productDb)=>{
+      return { id: productDb.id, ...productDb.data() }
+      
+    })
+    console.log(productsDb)
+    setProducts(productsDb)
   })
   .finally(()=>{
     setLoading(false)
   })
+}
+
+useEffect(()=>{
+  setLoading(true)
+  if(idCategory){
+    getProductByCategory()
+  } else {
+    getProducts()
+  }  
 },[idCategory])
 
 

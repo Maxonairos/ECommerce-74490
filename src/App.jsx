@@ -6,7 +6,7 @@ import ItemDetailContainer from './components/ItemDetailContainer'
 import NotFound from './components/NotFound'
 import { CartProvider } from './context/CartContext'
 import Cart from './components/Cart/Cart'
-
+import Footer from './components/Footer'
 
 function App() {
   
@@ -21,7 +21,8 @@ function App() {
           <Route path= "/detalle/:idProduct" element={<ItemDetailContainer/>}/>
           <Route path= "*" element={<NotFound/>}/>
           <Route path= "/cart" element={<Cart/>}/>          
-        </Routes>  
+        </Routes>
+        <Footer/>
         </CartProvider>  
       </BrowserRouter>  
     </div>

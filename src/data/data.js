@@ -49,6 +49,7 @@ const products = [
     img: ["/img/image5-1.webp","/img/image5-2.webp","/img/image5-3.webp","/img/image5-4.webp","/img/image5-5.webp"],
     categoria: "Gamer"
   },
+  
   {
     id: 6,
     nombre: "Monitor Led 24 Pulgadas Acer Gaming Kg241q Sbmiipx 165hz F Color Negro",
@@ -59,6 +60,7 @@ const products = [
     img: ["/img/image6-1.webp","/img/image6-2.webp","/img/image6-3.webp","/img/image6-4.webp"],
     categoria: "Monitores"
   },
+  ///items previos ya cargados en firestore
   {
     id: 7,
     nombre: "Teclado gamer Corsair K70 MAX Ingles Corsair MGX inglés internacional color gris oscuro con luz RGB",
