@@ -59,7 +59,6 @@ useEffect(()=>{
       {
         loading ? <Loading/>
         :
-        
         <ItemList products={products}/>
       }
         

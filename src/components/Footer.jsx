@@ -11,8 +11,8 @@ const Footer = () => {
                 <ul className="border inline-flex w-auto">
                     <li className="border inline-flex w-20 h-12  fill-gray-900">
                         <a className="flex justifiy-center content-center" href="">
-                            <div className="flex p-2 self-center content-center">
-                                <FaFacebook size={25} color="black" />
+                            <div className="flex p-2 self-center content-center hover:scale-105">
+                                <FaFacebook size={25} color="gray" />
                             </div>
                             
                         </a>

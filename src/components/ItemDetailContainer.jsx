@@ -50,7 +50,6 @@ const ItemDetailContainer = () => {
       {
         loading ? <Loading/>
         :
-        
         <ItemDetail product={product} addProduct={addProduct} hideItemCount={hideItemCount} removeButtonFinishBuy={removeButtonFinishBuy}/>
       }
     </>
