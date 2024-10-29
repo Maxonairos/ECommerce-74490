@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { CartContext } from "../../context/CartContext"
 import Swal from "sweetalert2"
+import { Link } from "react-router-dom"
 
 const CartResume = () => {
     const {totalPriceCart, deleteCart, totalQuantity} = useContext(CartContext)
@@ -43,7 +44,7 @@ const CartResume = () => {
         
         <div className="flex flex-wrap justify-evenly m-1 p-1 max-w-6xl bg-white ">
         <button className="inline-flex self-center m-1 px-3 py-2 text-sm font-medium text-center text-white bg-seagreen rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" onClick={modalWarningAll} >Vaciar Carrito</button>
-        <button className="inline-flex self-center m-1 px-3 py-2 text-sm font-medium text-center text-white bg-seagreen rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" onClick={modalInProgress} >Finalizar mi Compra</button>
+        <Link to="/checkout" className="inline-flex self-center m-1 px-3 py-2 text-sm font-medium text-center text-white bg-seagreen rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Finalizar Compra</Link>
         </div>
         
     </div>

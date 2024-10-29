@@ -60,7 +60,7 @@ const products = [
     img: ["/img/image6-1.webp","/img/image6-2.webp","/img/image6-3.webp","/img/image6-4.webp"],
     categoria: "Monitores"
   },
-  ///items previos ya cargados en firestore
+  
   {
     id: 7,
     nombre: "Teclado gamer Corsair K70 MAX Ingles Corsair MGX inglés internacional color gris oscuro con luz RGB",
@@ -71,6 +71,7 @@ const products = [
     img: ["/img/image7-1.webp","/img/image7-2.webp","/img/image7-3.webp","/img/image7-4.webp"],
     categoria: "Perifericos"
   },
+  ///items previos ya cargados en firestore
   {
     id: 8,
     nombre: "Mouse Gamer Razer Deathadder V2 X Hyperspeed Soy Gamer Color Negro",

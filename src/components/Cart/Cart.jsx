@@ -6,6 +6,7 @@ import CartResume from "./CartResume"
 import CartEmpty from "./CartEmpty"
 import Swal from "sweetalert2"
 
+
 const Cart = () => {
     const { cart, deleteProductInCart } = useContext(CartContext)
     
