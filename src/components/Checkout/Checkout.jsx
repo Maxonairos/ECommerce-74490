@@ -7,9 +7,18 @@ import BuySuccess from "./BuySuccess.jsx"
 
 const Checkout = () => {
     const [dataForm, setDataForm] = useState({
-        fullname: "",
-        phone: "",
-        email: ""
+        name: "",
+        surname:"",
+        email: "",
+        address: "",
+        number:"",
+        floor:"",
+        department:"",
+        province:"",
+        locality: "",
+        zipcode:"",
+        areacode:"",
+        phone: ""
     })
     const [orderId, setOrderId] = useState(null)
     const { cart, totalPriceCart, deleteCart } = useContext(CartContext)
@@ -50,7 +59,8 @@ const Checkout = () => {
     }
 
     return (
-        <div>
+        <div className="flex flex-wrap justify-center">
+            <div className="flex content-center">
             {
                 orderId ?
                     <BuySuccess orderId={orderId}/>
@@ -58,6 +68,8 @@ const Checkout = () => {
                     <FormCheckout dataForm={dataForm} handleSubmitForm={handleSubmitForm} handleChangeInput={handleChangeInput} />
 
             }
+            </div>
+            
         </div>
     )
 }
