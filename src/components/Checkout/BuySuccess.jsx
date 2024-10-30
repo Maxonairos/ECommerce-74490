@@ -8,7 +8,7 @@ const BuySuccess = ({orderId}) => {
             <p className="inline-flex text-xl font-bold text-gray-900 mb-4">Orden Nº:</p>
             <p className="inline-flex text-xl font-medium text-green-600 mb-4">"{orderId}"</p>
             <div className="">
-                <Link className="inline-flex self-center m-1 px-3 py-2 text-sm font-medium text-center text-white bg-gradient-to-r from-green-500 to-seagreen rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" to="/">Volver al Inicio</Link>
+                <Link className="inline-flex self-center m-1 px-3 py-2 text-sm font-medium text-center text-white bg-gradient-to-r from-green-500 to-seagreen rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 no-underline hover:underline transition duration-300 ease-in-out" to="/">Volver al Inicio</Link>
             </div>
             
         </div>
