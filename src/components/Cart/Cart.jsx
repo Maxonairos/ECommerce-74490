@@ -1,11 +1,10 @@
 import { useContext } from "react"
 import { CartContext } from "../../context/CartContext"
-import { FaTrash } from "react-icons/fa6"
 import { Link } from "react-router-dom"
 import CartResume from "./CartResume"
 import CartEmpty from "./CartEmpty"
 import Swal from "sweetalert2"
-import RemoveButton from "../RemoveButton"
+import RemoveButton from "./RemoveButton"
 
 const Cart = () => {
     const { cart, deleteProductInCart } = useContext(CartContext)

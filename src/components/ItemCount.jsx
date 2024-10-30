@@ -36,7 +36,7 @@ export const ItemCount = ({stock, addProduct}) => {
         </div>
       
       <div className="flex py-2 justify-center">
-      <button className="inline-flex w-38 items-end px-3 py-2 text-sm font-medium text-center text-white bg-gradient-to-r from-green-500 to-seagreen rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" onClick={handleClickAdd}>Agregar al Carrito</button>
+      <button className="inline-flex w-38 items-end px-3 py-2 text-sm font-medium text-center text-white bg-gradient-to-r from-green-500 to-seagreen rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 no-underline hover:underline transition duration-300 ease-in-out" onClick={handleClickAdd}>Agregar al Carrito</button>
       </div>
       
     </div>
