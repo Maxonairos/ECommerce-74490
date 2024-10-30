@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import CartResume from "./CartResume"
 import CartEmpty from "./CartEmpty"
 import Swal from "sweetalert2"
-
+import RemoveButton from "../RemoveButton"
 
 const Cart = () => {
     const { cart, deleteProductInCart } = useContext(CartContext)
@@ -59,8 +59,8 @@ const Cart = () => {
                                 <h2 className='flex self-center justify-center mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white'>Precio Parcial</h2>
                                 <p className='flex self-center justify-center mb-2 text-lg font-normal tracking-tight text-gray-900 dark:text-white'>{productCart.precio * productCart.quantity}$ ARS</p>
                             </div>
-                            <div className="flex self-center justify-center mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white'" >
-                                <FaTrash className="self-center mb-2 hover:scale-105 transition delay-100 duration-200 ease-in-out" size={30} color="seagreen" onClick={() => modalWarningProduct(productCart.id)}/>
+                            <div className="flex self-center justify-center mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white" onClick={() => modalWarningProduct(productCart.id)} >
+                                <RemoveButton/>
                             </div>
                         </div>
                     ))

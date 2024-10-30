@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from "react"
 import { useParams } from "react-router-dom"
 import Loading from "./Loading"
-//import { getProduct } from "../data/data.js"
 import { CartContext } from "../context/CartContext"
 import ItemDetail from "./ItemDetail"
 import { doc, getDoc } from "firebase/firestore"

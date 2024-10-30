@@ -25,7 +25,7 @@ const CartProvider = ({children})=>{
             title: `${mensajeToast}`,
             showConfirmButton: false,
             confirmButtonColor: "#00916E",
-            timer: 2000,
+            timer: 1500,
             timerProgressBar: true
         })
     }
@@ -33,8 +33,8 @@ const CartProvider = ({children})=>{
     let stockLimitToast = ()=>{
         Swal.fire({
             icon: "warning",
-            title: "Superaste el limite de stock por este producto",
-            text: "verifica si ya tienes productos en el carrito o si estas intentando agregar mas de lo tenemos en este momento😀",
+            title: "Superaste el límite de Stock por este producto",
+            text: "Verificá si ya tienes productos en el carrito o si estas intentando agregar mas de lo tenemos en este momento 😀",
             confirmButtonColor: "#00916E"
         })
     }
