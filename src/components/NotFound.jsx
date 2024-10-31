@@ -2,9 +2,11 @@ import { Link } from "react-router-dom"
 
 const NotFound = () => {
   return (
-    <div className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8 dark:bg-gray-800 dark:border-gray-700 border">
+    <div className="flex flex-wrap justify-center">
+      <div className="flex flex-col w-full max-w-6xl p-4 ">
+        <div className="grid rounded-xl min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8 dark:bg-gray-800 dark:border-gray-700 border">
         <div className="text-center">
-          <p className="text-base font-bold text-subtle-600">404</p>
+          <p className="text-base font-bold text-subtle-600 dark:text-white">404</p>
           <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-white">Página no encontrada</h1>
           <p className="mt-6 text-base leading-7 text-gray-600 dark:text-white">Disculpanos, pero no encontramos la página que estás buscando.</p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
@@ -12,6 +14,9 @@ const NotFound = () => {
           </div>
         </div>
       </div>
+    </div>
+    </div>
+    
   )
 }
 
