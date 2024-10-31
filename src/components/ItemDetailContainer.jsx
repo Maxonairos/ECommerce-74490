@@ -43,7 +43,7 @@ const ItemDetailContainer = () => {
         getProduct()  
     }, [idProduct])
 
-    //console.log(product)
+    
   return (
     <>
       {

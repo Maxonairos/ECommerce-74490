@@ -43,14 +43,12 @@ const CartProvider = ({children})=>{
 
     const addProductInCart = (newProduct, count) => {
         setMessageToast(count)
-        //console.log(cart)
         if (isInCart(newProduct.id)) {
                 const checkCart = cart.map(cartProduct => {
                     if (cartProduct.id == newProduct.id) {
                         const nuevaCantidad = cartProduct.quantity + count
                         
                         if (nuevaCantidad > newProduct.cantidad){
-                            //console.log("se supera el stock")
                             stockLimitToast()
                             return cartProduct
                             }
@@ -90,7 +88,6 @@ const CartProvider = ({children})=>{
     }
     const isInCart = (idProduct)=>{
         const checkCart = cart.some(CartProduct => CartProduct.id === idProduct)
-        //console.log("esta en el carrito: ",checkCart)
         return checkCart
         
     }

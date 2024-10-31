@@ -20,7 +20,6 @@ const ItemListContainer = ( { greeting }) => {
         
       })
       setProducts(productsDb)
-      console.log(productsDb)
     })
     .finally(()=>{
       setLoading(false)
@@ -35,7 +34,6 @@ const getProductByCategory = () =>{
       return { id: productDb.id, ...productDb.data() }
       
     })
-    console.log(productsDb)
     setProducts(productsDb)
   })
   .finally(()=>{
