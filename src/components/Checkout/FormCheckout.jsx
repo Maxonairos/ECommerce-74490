@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 const FormCheckout = ({ dataForm, handleChangeInput, handleSubmitForm  }) => {
     return (
         <div className="min-w-82 bg-white rounded-lg shadow-md p-8 m-2 border dark:bg-gray-800 dark:border-gray-700">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4 underline">Checkout</h2>
+        <h2 className="text-2xl font-bold text-gray-800 mb-4 underline dark:text-white">Checkout</h2>
         <form onSubmit={handleSubmitForm}>
             <div className="grid grid-cols-1 md:grid-cols-2 flex-wrap dark:bg-gray-800 dark:border-gray-700" >
                 <div className="flex flex-wrap dark:bg-gray-800 dark:border-gray-700">
