@@ -32,7 +32,7 @@ const CartResume = () => {
     }
 
     return (
-    <div className="m-2 p-2 h-36 max-w-6xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-70 ">
+    <div className="m-2 p-2 h-36 max-w-6xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div>
         <h2 className='inline-flex self-center m-1 text-lg font-bold tracking-tight text-gray-900 dark:text-white'>Precio Total:</h2>
         <div className="inline-flex self-center m-1 text-lg font-normal tracking-tight text-gray-900 dark:text-white">{totalPriceCart()}$ ARS</div>
@@ -42,7 +42,7 @@ const CartResume = () => {
             <div className='inline-flex self-center m-1 text-lg font-normal tracking-tight text-gray-900 dark:text-white'>{totalQuantity()} Productos </div>
         </div>
         
-        <div className="flex flex-wrap justify-evenly m-1 p-1 max-w-6xl bg-white ">
+        <div className="flex flex-wrap justify-evenly m-1 p-1 max-w-6xl bg-white dark:bg-gray-800 dark:border-gray-700">
         <button className="inline-flex self-center m-1 px-3 py-2 text-sm font-medium text-center text-white bg-gradient-to-r from-green-500 to-seagreen rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 no-underline hover:underline transition duration-300 ease-in-out" onClick={modalWarningAll} >Vaciar Carrito</button>
         <Link to="/checkout" className="inline-flex self-center m-1 px-3 py-2 text-sm font-medium text-center text-white bg-gradient-to-r from-green-500 to-seagreen rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 no-underline hover:underline transition duration-300 ease-in-out">Finalizar Compra</Link>
         </div>
