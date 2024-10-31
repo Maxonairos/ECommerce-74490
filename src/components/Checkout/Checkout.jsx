@@ -4,6 +4,7 @@ import { CartContext } from "../../context/CartContext.jsx"
 import { Timestamp, addDoc, collection, setDoc, doc } from "firebase/firestore"
 import db from "../../db/db.js"
 import BuySuccess from "./BuySuccess.jsx"
+import Swal from "sweetalert2"
 
 const Checkout = () => {
     const [dataForm, setDataForm] = useState({
@@ -18,7 +19,8 @@ const Checkout = () => {
         locality: "",
         zipcode:"",
         areacode:"",
-        phone: ""
+        phone: "",
+        repeatemail:""
     })
     const [orderId, setOrderId] = useState(null)
     const { cart, totalPriceCart, deleteCart } = useContext(CartContext)
@@ -36,7 +38,20 @@ const Checkout = () => {
             date: Timestamp.fromDate(new Date()),
             total: totalPriceCart()
         }
-        uploadOrder(order)
+        if (dataForm.email === dataForm.repeatemail){
+            uploadOrder(order)
+        } else {
+            emailHandleToast()
+        }
+    }
+
+    let emailHandleToast = ()=>{
+        Swal.fire({
+            icon: "warning",
+            title: "Email erróneo   ",
+            text: "Verificá si el email que ingresaste es correcto",
+            confirmButtonColor: "#00916E"
+        })
     }
 
     const uploadOrder = (newOrder) => {

@@ -54,6 +54,10 @@ const FormCheckout = ({ dataForm, handleChangeInput, handleSubmitForm  }) => {
                     <label className="text-xl font-bold text-gray-900 mb-4 content-center" >*Email: </label>
                     <input className="bg-gray-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-green-500 transition ease-in-out duration-150 mx-1" type="email" name="email" value={dataForm.email} onChange={handleChangeInput} placeholder='miemail@ejemplo.com' required/>
                 </div>
+                <div className="flex flex-wrap">
+                    <label className="text-xl font-bold text-gray-900 mb-4 content-center" >*Repetir Email: </label>
+                    <input className="bg-gray-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-green-500 transition ease-in-out duration-150 mx-1" type="email" name="repeatemail" value={dataForm.repeatemail} onChange={handleChangeInput} placeholder='miemail@ejemplo.com' required/>
+                </div>
             </div>
             <div className="flex justify-evenly">
                     <Link className="inline-flex self-center m-1 px-3 py-2 text-sm font-medium text-center text-white bg-gradient-to-r from-green-500 to-seagreen rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 no-underline hover:underline transition duration-300 ease-in-out" to="/cart">Volver al Carrito</Link>
