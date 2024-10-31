@@ -12,7 +12,7 @@ import Checkout from './components/Checkout/Checkout'
 function App() {
   
   return (
-    <div className='container justify-center bg-gray-100 min-w-0 min-w-full min-h-screen'>
+    <div className='container justify-center bg-gray-100 min-w-0 min-w-full min-h-screen dark:bg-gray-800 dark:border-gray-700'>
       <BrowserRouter>
       <CartProvider>
         <NavBar/>   
