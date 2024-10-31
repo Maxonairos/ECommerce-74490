@@ -64,7 +64,7 @@ const Cart = () => {
                         </div>
                     ))
                 }
-                <div className="w-full">
+                <div className="w-full dark:bg-gray-800 dark:border-gray-700">
                     {
                         cart.length === 0 ? <CartEmpty /> : <CartResume />
                     }
