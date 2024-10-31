@@ -5,7 +5,7 @@ const Item = ({product}) => {
       <div className="m-2 p-2 max-w-sm bg-white border border-gray-300 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:scale-102 transition duration-200 ease-in-out">
               <p className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{product.nombre}</p>
               <Link to={`/detalle/${product.id}`}>
-                <img className="object-contain h-96 w-96" src={product.img[0]}  alt="imagen del producto" />
+                <img className="object-contain h-96 w-96 dark:bg-white" src={product.img[0]}  alt="imagen del producto" />
               </Link>
               <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Precio: {product.precio}$ ARS</h5>
               <h3 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Categoria: {product.categoria}</h3>

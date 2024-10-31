@@ -12,12 +12,12 @@ const ItemDetail = ({ product , addProduct, hideItemCount , removeButtonFinishBu
       <div className="justify-center m-3 p-2 max-w-4xl h-3/4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <h2 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>{product.nombre}</h2>
               <div className="justify-center flex">
-          <img className="object-contain h-96 w-auto bg-grey border hover:scale-102 transition delay-100 duration-200 ease-in-out" src={currentImage} alt="Imagen de producto" />
+          <img className="object-contain h-96 w-auto bg-grey border hover:scale-102 transition delay-100 duration-200 ease-in-out dark:bg-white" src={currentImage} alt="Imagen de producto" />
         </div>
         <div className="justify-center flex flex-wrap">
           {
             images.map ((imagen)=>(
-              <img className="flex flex-wrap m-1 bg-grey border hover:opacity-50 rounded-md object-contain h-48 w-48 sm:object-scale-down" alt="Imagen alternativa del Producto" src={imagen} key={imagen} onClick={()=> setCurrentImage(imagen)}/> 
+              <img className="flex flex-wrap m-1 bg-grey border hover:opacity-50 rounded-md object-contain h-48 w-48 sm:object-scale-down dark:bg-white" alt="Imagen alternativa del Producto" src={imagen} key={imagen} onClick={()=> setCurrentImage(imagen)}/> 
             ))
           }
         </div>
