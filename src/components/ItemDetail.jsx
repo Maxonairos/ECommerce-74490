@@ -1,6 +1,6 @@
 import { useState } from "react"
 import ItemCount from "./ItemCount.jsx"
-import ItemFinishBuy from "./itemFinishBuy.jsx"
+import ItemFinishBuy from "./ItemFinishBuy.jsx"
 
 const ItemDetail = ({ product , addProduct, hideItemCount , removeButtonFinishBuy}  ) => {
   const [currentImage , setCurrentImage ] = useState(product.img[0])
