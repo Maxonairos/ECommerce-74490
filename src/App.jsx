@@ -12,7 +12,7 @@ import Checkout from './components/Checkout/Checkout'
 function App() {
   
   return (
-    <div className='container justify-center bg-gray-100 min-w-0 min-w-full min-h-screen dark:bg-gray-800 dark:border-gray-700'>
+    <div className='container justify-center bg-gray-100 min-w-0 min-w-full min-h-screen max-h-4/5 dark:bg-gray-800 dark:border-gray-700'>
       <BrowserRouter>
       <CartProvider>
         <NavBar/>   
@@ -24,7 +24,7 @@ function App() {
           <Route path= "/cart" element={<Cart/>}/>
           <Route path= "/checkout" element={<Checkout/>}/>            
         </Routes>
-        
+        <Footer/>
         </CartProvider>  
       </BrowserRouter>  
     </div>

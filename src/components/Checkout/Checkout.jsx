@@ -85,7 +85,7 @@ const Checkout = () => {
     }
 
     return (
-        <div className="flex flex-wrap justify-center">
+        <div className="flex flex-wrap justify-center min-h-screen">
             <div className="flex content-center">
             {
                 renderForm && <FormCheckout dataForm={dataForm} handleSubmitForm={handleSubmitForm} handleChangeInput={handleChangeInput} />                    

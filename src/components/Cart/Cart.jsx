@@ -29,7 +29,7 @@ const Cart = () => {
     
 
     return (
-        <div className="flex flex-wrap justify-center">
+        <div className="flex flex-wrap justify-center min-h-screen">
             <div className="flex flex-col w-full max-w-6xl p-4">
                 <h1 className='flex flex-wrap self-center mb-4 text-xl font-bold tracking-tight text-gray-700 dark:text-white'>
                     Mi Carrito

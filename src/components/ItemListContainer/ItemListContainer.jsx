@@ -52,7 +52,7 @@ useEffect(()=>{
 
 
   return (
-    <div className="flex flex-wrap mx-auto max-w-8xl px-2 sm:px-6 lg:px-8 items-center justify-evenly sm:items-stretch sm:justify-center dark:bg-gray-800 dark:border-gray-700">
+    <div className="flex flex-wrap mx-auto max-w-8xl px-2 sm:px-6 lg:px-8 items-center justify-evenly sm:items-stretch sm:justify-center dark:bg-gray-800 dark:border-gray-700 min-h-screen">
       <h1 className="mb-2 text-xl font-normal tracking-tight text-gray-600 dark:text-white">{greeting}</h1>
       {
         loading ? <Loading/>

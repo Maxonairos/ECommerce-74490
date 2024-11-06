@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 const BuySuccess = ({orderId}) => {
     return (
-        <div className="max-w-2xl bg-white rounded-lg shadow-md p-8 m-2 dark:bg-gray-800 dark:border-gray-700 border">
+        <div className="max-w-2xl bg-white rounded-lg shadow-md p-8 m-2 dark:bg-gray-800 dark:border-gray-700 border max-h-fit">
             <h2 className="text-2xl font-bold text-gray-800 mb-4 dark:text-white">Tu compra fue Exitosa!!! 😀</h2>
             <p className="text-xl font-bold text-gray-900 mb-4 dark:text-white">Puedes guardar el numero de seguimiento para obtener información de tu compra</p>
             <p className="inline-flex text-xl font-bold text-gray-900 mb-4 dark:text-white">Orden Nº:</p>

@@ -2,8 +2,8 @@ import { Link } from "react-router-dom"
 
 const NotFound = () => {
   return (
-    <div className="flex flex-wrap justify-center">
-      <div className="flex flex-col w-full max-w-6xl p-4 ">
+    <div className="flex flex-wrap justify-center min-h-screen">
+      <div className="flex flex-col w-full max-w-6xl p-4">
         <div className="grid rounded-xl min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8 dark:bg-gray-800 dark:border-gray-700 border">
         <div className="text-center">
           <p className="text-base font-bold text-subtle-600 dark:text-white">404</p>
