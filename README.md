@@ -18,9 +18,9 @@
 
 ## Acerca del Proyecto:
 
-- Se realizó un proyecto de desarrollo de un E-commerce de forma progresiva durante la cursada.
+- Se realizó un proyecto de desarrollo de un E-commerce de forma progresiva durante la cursada en CoderHouse.
 
-- Se utilizo React js y Vite como frameworks de desarrollo.
+- Se empleó React js y Vite como frameworks de desarrollo.
 
 - Se sumo React Router DOM para las navegaciones.
 
@@ -34,7 +34,7 @@
 
 - Se utilizaron transiciones y efectos para algunos íconos.
 
-- La aplicación cuenta con un dark Mode nativo, tomando en cuenta la aparencia elegida en el navegador. (Taildwind CSS).
+- La aplicación cuenta con un Dark Mode nativo, tomando en cuenta la aparencia elegida en el navegador o del mismo sistema. (Taildwind CSS).
 
 - Aplicación full Responsive (Taildwind CSS).
 
