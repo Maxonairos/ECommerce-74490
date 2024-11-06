@@ -50,11 +50,16 @@
 
 `Firestore` `React-Router-DOM` `SweetAlert 2` `React` `React-Spinners` `React-Icons` `Taildwind CSS` `Vite` `Vercel` `GitHub`
 
-<a href="https://firebase.google.com/docs/firestore?hl=es-419" target="_blank"> <img src="https://www.gstatic.com/devrel-devsite/prod/ve73583a8e360906cd2a16ff5571c1edda64ba053fc57f348efff9496af45f422/firebase/images/lockup.svg" alt="firebase" width="80" height="80"/> </a>
-<a href="https://vite.dev/" target="_blank"> <img src="https://vite.dev/logo.svg" alt="Vite" width="30" height="40"/> </a>
-<a href="https://sweetalert2.github.io/" target="_blank"> <img src="https://sweetalert2.github.io/images/SweetAlert2.png" alt="SweetAlert 2" width="80" height="50"/> </a>
+<a href="https://firebase.google.com/docs/firestore?hl=es-419" target="_blank"> <img src="https://www.gstatic.com/devrel-devsite/prod/ve73583a8e360906cd2a16ff5571c1edda64ba053fc57f348efff9496af45f422/firebase/images/lockup.svg" alt="firebase" width="80"/></a>
+
+<a href="https://vite.dev/" target="_blank"> <img src="https://vite.dev/logo.svg" alt="Vite" width="40" height="40"/> </a>
+
+<a href="https://sweetalert2.github.io/" target="_blank"> <img src="https://sweetalert2.github.io/images/SweetAlert2.png" alt="SweetAlert 2" width="80" height="40"/></a>
+
 <a href="https://tailwindcss.com/" target="_blank"> <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" alt="Taildwind CSS" width="35" height="20"/> </a>
+
 <a href="https://es.react.dev/" target="_blank"> <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" width="35" height="20"/> </a>
+
 <a href="https://vercel.com/" target="_blank"> <img src="https://vercel.com/mktng/_next/static/media/vercel-logotype-light.700a8d26.svg" alt="Vercel" width="60" height="20"/> </a>
 
 ## Funcionalidades
