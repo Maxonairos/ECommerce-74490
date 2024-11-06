@@ -18,7 +18,7 @@ const Cart = () => {
             confirmButtonText: "Eliminar",
             focusCancel: true,
             showCancelButton: true,
-            cancelButtonText: "Cancelar",
+            cancelButtonText: "Cancelar"
         }).then((resultado)=>{
             if (resultado.isConfirmed) {
                 deleteProductInCart(value) 
