@@ -5,6 +5,8 @@ import { Timestamp, addDoc, collection, setDoc, doc } from "firebase/firestore"
 import db from "../../db/db.js"
 import BuySuccess from "./BuySuccess.jsx"
 import Swal from "sweetalert2"
+import Loading from "../Loading.jsx"
+
 
 const Checkout = () => {
     const [dataForm, setDataForm] = useState({
@@ -22,7 +24,12 @@ const Checkout = () => {
         phone: "",
         repeatemail:""
     })
+
+
     const [orderId, setOrderId] = useState(null)
+    const [renderForm, setRenderForm] = useState(true)
+    const [renderLoading, setRenderLoading] = useState(false)
+    const [renderBuySuccess, setRenderBuySuccess] = useState(false)
     const { cart, totalPriceCart, deleteCart } = useContext(CartContext)
 
     const handleChangeInput = (event) => {
@@ -55,6 +62,8 @@ const Checkout = () => {
     }
 
     const uploadOrder = (newOrder) => {
+        setRenderForm(false)
+        setRenderLoading(true)
         const orderCollection = collection(db, "orders")
         addDoc(orderCollection, newOrder)
             .then((response) => {
@@ -70,6 +79,8 @@ const Checkout = () => {
             const productRef = doc(db, "productos", id)
             setDoc(productRef, { ...productCart, cantidad: productCart.cantidad - quantity })
         })
+        setRenderLoading(false)
+        setRenderBuySuccess(true)
         deleteCart()
     }
 
@@ -77,11 +88,13 @@ const Checkout = () => {
         <div className="flex flex-wrap justify-center">
             <div className="flex content-center">
             {
-                orderId ?
-                    <BuySuccess orderId={orderId}/>
-                    :
-                    <FormCheckout dataForm={dataForm} handleSubmitForm={handleSubmitForm} handleChangeInput={handleChangeInput} />
-
+                renderForm && <FormCheckout dataForm={dataForm} handleSubmitForm={handleSubmitForm} handleChangeInput={handleChangeInput} />                    
+            }
+            {
+                renderLoading && <Loading/>
+            }
+            {
+                renderBuySuccess && <BuySuccess orderId={orderId}/>
             }
             </div>
             
