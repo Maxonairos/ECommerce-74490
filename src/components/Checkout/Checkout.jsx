@@ -1,10 +1,10 @@
-import { useContext, useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import FormCheckout from "./FormCheckout.jsx"
 import { CartContext } from "../../context/CartContext.jsx"
-import { Timestamp, collection, doc, runTransaction } from "firebase/firestore"
+import { Timestamp, collection, doc, runTransaction, updateDoc } from "firebase/firestore"
 import db from "../../db/db.js"
-import BuySuccess from "./BuySuccess.jsx"
+import PurchaseSummary from "./PurchaseSummary.jsx"
 import Swal from "sweetalert2"
 import Loading from "../Loading.jsx"
 import useProvinces from "../../hooks/useProvinces.js"
@@ -54,8 +54,10 @@ const Checkout = () => {
 
     const [errors, setErrors] = useState({})
     const [orderId, setOrderId] = useState(null)
+    const [order, setOrder] = useState(null)
     const [isSubmitting, setIsSubmitting] = useState(false)
-    const isRedirectingRef = useRef(false)
+    const [isPaying, setIsPaying] = useState(false)
+    const [paymentError, setPaymentError] = useState("")
     const { cart, totalPriceCart, deleteCart } = useContext(CartContext)
     const {
         provinces,
@@ -66,7 +68,7 @@ const Checkout = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (!orderId && !isRedirectingRef.current && cart.length === 0) {
+        if (!orderId && cart.length === 0) {
             navigate("/cart", { replace: true })
         }
     }, [cart.length, orderId, navigate])
@@ -164,28 +166,8 @@ const Checkout = () => {
 
         try {
             const orderRef = doc(collection(db, "orders"))
-            let preference = null
-
-            // La preferencia se crea antes de guardar la orden para poder
-            // incluir el ID del link de pago en el mismo documento. Si falla,
-            // la orden no se crea y el carrito queda intacto para reintentar.
-            if (isMercadoPagoEnabled) {
-                preference = await createPaymentPreference({
-                    items: cart,
-                    orderId: orderRef.id,
-                    payer: {
-                        name: buyer.name,
-                        surname: buyer.surname,
-                        email: buyer.email
-                    }
-                })
-
-                if (!preference?.preferenceId) {
-                    throw new Error("Mercado Pago no devolvió el ID del link de pago.")
-                }
-            }
-
             const order = {
+                id: orderRef.id,
                 buyer,
                 products: cart.map((productCart) => ({
                     id: productCart.id,
@@ -196,10 +178,12 @@ const Checkout = () => {
                 date: Timestamp.fromDate(new Date()),
                 total: totalPriceCart(),
                 status: "pending",
-                paymentPreferenceId: preference?.preferenceId ?? null,
-                paymentInitPoint:
-                    preference?.checkoutUrl ?? preference?.initPoint ?? null,
-                paymentId: null
+                paymentPreferenceId: null,
+                paymentInitPoint: null,
+                paymentId: null,
+                paymentStatus: null,
+                paymentStatusDetail: null,
+                paymentCreatedAt: null
             }
 
             await runTransaction(db, async (transaction) => {
@@ -238,17 +222,8 @@ const Checkout = () => {
                 })
             })
 
-            const checkoutUrl =
-                preference?.checkoutUrl ?? preference?.initPoint ?? null
-
-            if (checkoutUrl) {
-                isRedirectingRef.current = true
-                deleteCart()
-                window.location.assign(checkoutUrl)
-                return
-            }
-
             setOrderId(orderRef.id)
+            setOrder(order)
             deleteCart()
         } catch (error) {
             console.error("No se pudo finalizar la compra:", error)
@@ -265,11 +240,59 @@ const Checkout = () => {
         }
     }
 
-    if (orderId) {
+    const handlePayment = async () => {
+        if (!order || isPaying) return
+
+        setIsPaying(true)
+        setPaymentError("")
+
+        try {
+            const preference = await createPaymentPreference({
+                items: order.products,
+                orderId: order.id,
+                payer: {
+                    name: order.buyer.name,
+                    surname: order.buyer.surname,
+                    email: order.buyer.email
+                }
+            })
+
+            const checkoutUrl = preference?.checkoutUrl ?? preference?.initPoint ?? null
+            if (!preference?.preferenceId || !checkoutUrl) {
+                throw new Error("Mercado Pago no devolvió una URL de checkout válida.")
+            }
+
+            const paymentData = {
+                paymentPreferenceId: preference.preferenceId,
+                paymentInitPoint: checkoutUrl,
+                paymentSandbox: preference.sandbox === true,
+                paymentStatus: "created",
+                paymentStatusDetail: null,
+                paymentCreatedAt: Timestamp.fromDate(new Date())
+            }
+
+            await updateDoc(doc(db, "orders", order.id), paymentData)
+            setOrder((current) => ({ ...current, ...paymentData }))
+            window.location.assign(checkoutUrl)
+        } catch (error) {
+            console.error("No se pudo iniciar el pago:", error)
+            setPaymentError(error.message || "No se pudo iniciar el pago. Intentá nuevamente.")
+        } finally {
+            setIsPaying(false)
+        }
+    }
+
+    if (orderId && order) {
         return (
             <div className="flex flex-wrap justify-center min-h-screen">
                 <div className="flex content-center">
-                    <BuySuccess orderId={orderId} />
+                    <PurchaseSummary
+                        order={order}
+                        paymentEnabled={isMercadoPagoEnabled}
+                        isPaying={isPaying}
+                        paymentError={paymentError}
+                        onPay={handlePayment}
+                    />
                 </div>
             </div>
         )

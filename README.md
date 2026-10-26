@@ -119,18 +119,22 @@ El checkout puede iniciar un pago con Checkout Pro usando la API de `MP-NodeJS/m
    VITE_MP_API_URL=https://<tu-proyecto>.vercel.app
    ```
 
-2. Al confirmar la compra se crea la preferencia y se guarda la orden en Firestore con:
+2. Al confirmar el formulario se guarda la orden en Firestore y se muestra una pantalla con el resumen de productos, comprador, entrega y total. La preferencia de Mercado Pago se crea al presionar **Pagar con Mercado Pago**, y sus identificadores se guardan en la misma orden:
 
    ```js
    {
      status: "pending",
-     paymentPreferenceId: "123456789-abcd-...", // ID del link de pago
-     paymentInitPoint: "https://www.mercadopago.com.ar/...",
-     paymentId: null
+      paymentPreferenceId: "123456789-abcd-...", // se completa al iniciar el pago
+      paymentInitPoint: "https://www.mercadopago.com.ar/...", // URL usada
+      paymentSandbox: true,
+      paymentStatus: "created",
+      paymentStatusDetail: null,
+      paymentCreatedAt: "timestamp",
+      paymentId: null // se completa al volver de Mercado Pago
    }
    ```
 
-3. El usuario es redirigido a Mercado Pago. Al volver a `/checkout/resultado`, la app consulta el pago y actualiza la orden:
+3. El usuario presiona el botón **Pagar con Mercado Pago** y es redirigido al checkout. Al volver a `/checkout/resultado`, la app consulta el pago y actualiza la orden:
 
    ```js
    {
@@ -145,7 +149,7 @@ El checkout puede iniciar un pago con Checkout Pro usando la API de `MP-NodeJS/m
 
 > Si `VITE_MP_API_URL` está vacía, el checkout mantiene el comportamiento anterior: guarda la orden y muestra el número de seguimiento, sin iniciar el pago.
 
-> Si la API está configurada con credenciales de prueba (`TEST-`), se usa `checkoutUrl`, que abre el checkout de **sandbox** para pagar con usuarios de prueba.
+> El resumen se muestra antes de salir de Gamerstore. La orden ya existe aunque el usuario todavía no haya iniciado el pago, lo que permite rastrear intentos abandonados. Con `MP_SANDBOX=true`, `checkoutUrl` abre el checkout de sandbox para pagar con usuarios de prueba.
 
 > Para que la orden se actualice al volver de Mercado Pago, las reglas de Firestore deben permitir `update` sobre `orders` (por ejemplo, solo los campos de pago). El detalle de la integración está en `MP-NodeJS/mp/docs/integracion-gamerstore.md`.
 
