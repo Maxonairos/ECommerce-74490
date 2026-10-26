@@ -20,6 +20,16 @@ const fields = [
         maxLength: 50
     },
     {
+        name: "dni",
+        label: "*DNI",
+        type: "text",
+        placeholder: "Sin puntos. Ej: 30123456",
+        autoComplete: "off",
+        required: true,
+        maxLength: 8,
+        inputMode: "numeric"
+    },
+    {
         name: "areacode",
         label: "*Código de área",
         type: "tel",

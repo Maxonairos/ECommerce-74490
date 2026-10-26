@@ -58,6 +58,10 @@ const NavBar = () => {
               >
                 <CartWidget />
               </NavLink>
+
+              <NavLink className={navLinkClasses} to="/consulta-compra">
+                Consultar compra
+              </NavLink>
             </div>
 
             <div className="flex items-center gap-2 sm:hidden">
@@ -102,6 +106,7 @@ const NavBar = () => {
                 </NavLink>
               </li>
             ))}
+            <li className="flex"><NavLink className={navLinkClasses} to="/consulta-compra" onClick={closeMenu}>Consultar compra</NavLink></li>
           </ul>
         </div>
       </div>

@@ -12,6 +12,7 @@ const ItemDetailContainer = lazy(() => import('./components/ItemDetailContainer'
 const Cart = lazy(() => import('./components/Cart/Cart'))
 const Checkout = lazy(() => import('./components/Checkout/Checkout'))
 const PaymentResult = lazy(() => import('./components/Checkout/PaymentResult'))
+const OrderLookup = lazy(() => import('./components/OrderLookup'))
 
 const ScrollToTop = () => {
   const { pathname } = useLocation()
@@ -41,6 +42,7 @@ function App() {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/checkout/resultado" element={<PaymentResult />} />
+                <Route path="/consulta-compra" element={<OrderLookup />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

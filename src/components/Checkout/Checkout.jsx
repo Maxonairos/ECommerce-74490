@@ -24,6 +24,10 @@ const sanitizeInputValue = (fieldName, value) => {
         return value.replace(/\D/g, "")
     }
 
+    if (fieldName === "dni") {
+        return value.replace(/\D/g, "")
+    }
+
     if (fieldName === "zipcode") {
         return value.replace(/[^a-zA-Z0-9]/g, "").toUpperCase()
     }
@@ -39,6 +43,7 @@ const Checkout = () => {
     const [dataForm, setDataForm] = useState({
         name: "",
         surname: "",
+        dni: "",
         email: "",
         address: "",
         number: "",

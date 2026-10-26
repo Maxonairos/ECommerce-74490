@@ -10,6 +10,7 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 export const checkoutFields = [
     "name",
     "surname",
+    "dni",
     "areacode",
     "phone",
     "address",
@@ -73,6 +74,12 @@ export const validateCheckoutField = (fieldName, value, dataForm, provinces = []
             return validateName(value, "nombre")
         case "surname":
             return validateName(value, "apellido")
+        case "dni": {
+            const dni = cleanText(value)
+            if (!dni) return "Ingresá tu DNI."
+            if (!/^\d{7,8}$/.test(dni)) return "El DNI debe tener entre 7 y 8 dígitos."
+            return ""
+        }
         case "areacode": {
             const areacode = cleanText(value)
             if (!areacode) return "Ingresá el código de área."

@@ -153,6 +153,18 @@ El checkout puede iniciar un pago con Checkout Pro usando la API de `MP-NodeJS/m
 
 > Para que la orden se actualice al volver de Mercado Pago, las reglas de Firestore deben permitir `update` sobre `orders` (por ejemplo, solo los campos de pago). El detalle de la integración está en `MP-NodeJS/mp/docs/integracion-gamerstore.md`.
 
+## Consulta de compras
+
+La ruta `/consulta-compra` permite consultar una orden por:
+
+- DNI del comprador.
+- Número de operación de Mercado Pago.
+- ID de la orden de Gamerstore.
+
+El resultado muestra los productos, comprador, total, estado de la orden, estado y detalle del pago, número de operación y preferencia de Mercado Pago.
+
+> La consulta por DNI es una búsqueda pública. Para producción conviene agregar un segundo dato de verificación, como email o código de seguimiento, antes de mostrar datos personales y de la compra.
+
 ## Funcionalidades
 
 :heavy_check_mark: `1:` Navegación fluida por Categorias de productos e Items individuales.

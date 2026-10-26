@@ -29,6 +29,7 @@ const PurchaseSummary = ({
                 <h3 className="mb-3 font-semibold text-gray-800 dark:text-white">Datos de entrega</h3>
                 <dl className="grid grid-cols-1 gap-2 text-sm text-gray-700 dark:text-gray-200 sm:grid-cols-2">
                     <div><dt className="font-semibold">Nombre</dt><dd>{buyer.name} {buyer.surname}</dd></div>
+                    <div><dt className="font-semibold">DNI</dt><dd>{buyer.dni}</dd></div>
                     <div><dt className="font-semibold">Email</dt><dd className="break-all">{buyer.email}</dd></div>
                     <div><dt className="font-semibold">Teléfono</dt><dd>{buyer.areacode} {buyer.phone}</dd></div>
                     <div><dt className="font-semibold">Código postal</dt><dd>{buyer.zipcode}</dd></div>
