@@ -41,8 +41,8 @@ function App() {
                 <Route path="/detalle/:idProduct" element={<ItemDetailContainer />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkout" element={<Checkout />} />
-                <Route path="/checkout/resultado" element={<PaymentResult />} />
                 <Route path="/consulta-compra" element={<OrderLookup />} />
+                <Route path="/checkout/resultado" element={<PaymentResult />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
