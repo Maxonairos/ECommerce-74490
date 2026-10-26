@@ -46,6 +46,10 @@ const NavBar = () => {
                 </NavLink>
               ))}
 
+              <NavLink className={navLinkClasses} to="/consulta-compra">
+                Consultar compra
+              </NavLink>
+
               <NavLink
                 className={({ isActive }) =>
                   `flex items-center rounded-md px-2 py-1 text-sm font-bold transition duration-200 ${
@@ -57,10 +61,6 @@ const NavBar = () => {
                 to="/cart"
               >
                 <CartWidget />
-              </NavLink>
-
-              <NavLink className={navLinkClasses} to="/consulta-compra">
-                Consultar compra
               </NavLink>
             </div>
 
