@@ -366,13 +366,20 @@ const products = [
     }
 ];
 
-const seedProducts = () => {
-    const producsRef = collection(db,"productos")
-    products.map(( { id, ...dataProduct } )=> {
-        addDoc(producsRef, dataProduct)
-    })
-    console.log("productos cargados")
-    return
+const seedProducts = async () => {
+    const productsRef = collection(db, "productos")
+
+    try {
+        await Promise.all(
+            products.map(({ id, ...dataProduct }) => addDoc(productsRef, dataProduct))
+        )
+        console.log(`Productos cargados: ${products.length}`)
+    } catch (error) {
+        console.error("No se pudieron cargar los productos:", error)
+    }
 }
 
-seedProducts()
+// This file is not imported by the application. Import and call seedProducts()
+// manually (for example from a temporary script) only when you need to seed
+// the database, to avoid duplicating products accidentally.
+export default seedProducts

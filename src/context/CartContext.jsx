@@ -1,100 +1,169 @@
-import { createContext, useState } from "react"
+import { createContext, useEffect, useMemo, useRef, useState } from "react"
 import Swal from "sweetalert2"
 
 const CartContext = createContext()
 
-const CartProvider = ({children})=>{
+const STORAGE_KEY = "gamerstore-cart"
 
+const isValidCartProduct = (product) =>
+    product &&
+    product.id !== undefined &&
+    product.id !== null &&
+    Number(product.quantity) > 0 &&
+    Number.isFinite(Number(product.precio))
 
-    let mensajeToast = ""
-    let mensaje1 = "Producto Agregado al Carrito"
-    let mensaje2 = "Productos Agregados al Carrito"
+const readStoredCart = () => {
+    if (typeof window === "undefined") return []
 
-    const setMessageToast = (count)=>{
-        if (count > 1){
-            mensajeToast = `${count} ${mensaje2}`
-        } else {
-            mensajeToast = `${count} ${mensaje1}`
-        }
+    try {
+        const storedCart = window.localStorage.getItem(STORAGE_KEY)
+        if (!storedCart) return []
 
+        const parsedCart = JSON.parse(storedCart)
+        return Array.isArray(parsedCart) ? parsedCart.filter(isValidCartProduct) : []
+    } catch (error) {
+        console.error("No se pudo leer el carrito guardado:", error)
+        return []
+    }
+}
+
+const CartProvider = ({ children }) => {
+    const [cart, setCart] = useState(readStoredCart)
+    const cartRef = useRef(cart)
+
+    const commitCart = (nextCart) => {
+        cartRef.current = nextCart
+        setCart(nextCart)
     }
 
-    let addProductToast =()=>{
+    useEffect(() => {
+        if (typeof window === "undefined") return
+
+        try {
+            window.localStorage.setItem(STORAGE_KEY, JSON.stringify(cart))
+        } catch (error) {
+            console.error("No se pudo guardar el carrito:", error)
+        }
+    }, [cart])
+
+    const addProductToast = (count, totalInCart) => {
+        const addedMessage = count === 1
+            ? "1 producto agregado al carrito"
+            : `${count} productos agregados al carrito`
+
         Swal.fire({
             icon: "success",
-            title: `${mensajeToast}`,
+            title: addedMessage,
+            text: `Tenés ${totalInCart} ${totalInCart === 1 ? "unidad" : "unidades"} de este producto en el carrito`,
             showConfirmButton: false,
-            confirmButtonColor: "#00916E",
-            timer: 1500,
+            timer: 1700,
             timerProgressBar: true
         })
     }
 
-    let stockLimitToast = ()=>{
+    const stockLimitToast = (availableStock) => {
+        if (!availableStock) {
+            Swal.fire({
+                icon: "warning",
+                title: "Sin stock",
+                text: "Este producto no tiene stock disponible en este momento.",
+                confirmButtonColor: "#00916E"
+            })
+            return
+        }
+
         Swal.fire({
             icon: "warning",
-            title: "Superaste el límite de Stock por este producto",
-            text: "Verificá si ya tienes productos en el carrito o si estas intentando agregar mas de lo tenemos en este momento 😀",
+            title: "Superaste el límite de stock",
+            text: `Podés agregar hasta ${availableStock} ${availableStock === 1 ? "unidad" : "unidades"} de este producto. Revisá las unidades que ya tenés en el carrito.`,
             confirmButtonColor: "#00916E"
         })
     }
 
-    const [ cart, setCart ] = useState([])
+    const isInCart = (idProduct) =>
+        cartRef.current.some(
+            (cartProduct) => String(cartProduct.id) === String(idProduct)
+        )
 
     const addProductInCart = (newProduct, count) => {
-        setMessageToast(count)
-        if (isInCart(newProduct.id)) {
-                const checkCart = cart.map(cartProduct => {
-                    if (cartProduct.id == newProduct.id) {
-                        const nuevaCantidad = cartProduct.quantity + count
-                        
-                        if (nuevaCantidad > newProduct.cantidad){
-                            stockLimitToast()
-                            return cartProduct
-                            }
-                            addProductToast()
-                        return {...cartProduct, quantity: nuevaCantidad }
-                        }  
-                return cartProduct
-                })
-                setCart(checkCart)
-                                
-            } else {
-                setCart([...cart, newProduct]);
-                addProductToast()
-                
+        const quantityToAdd = Number(count)
+        const availableStock = Number(newProduct?.cantidad)
+
+        if (!newProduct?.id || !Number.isInteger(quantityToAdd) || quantityToAdd <= 0) {
+            return false
         }
-        
-        
+
+        if (!Number.isFinite(availableStock) || availableStock <= 0) {
+            stockLimitToast(0)
+            return false
+        }
+
+        const currentCart = cartRef.current
+        const productInCart = currentCart.find(
+            (cartProduct) => String(cartProduct.id) === String(newProduct.id)
+        )
+        const quantityInCart = productInCart ? Number(productInCart.quantity) : 0
+        const newQuantity = quantityInCart + quantityToAdd
+
+        if (newQuantity > availableStock) {
+            stockLimitToast(availableStock)
+            return false
+        }
+
+        const nextCart = productInCart
+            ? currentCart.map((cartProduct) =>
+                String(cartProduct.id) === String(newProduct.id)
+                    ? { ...cartProduct, quantity: newQuantity }
+                    : cartProduct
+            )
+            : [...currentCart, { ...newProduct, quantity: quantityToAdd }]
+
+        commitCart(nextCart)
+        addProductToast(quantityToAdd, newQuantity)
+        return true
     }
-    
+
     const deleteProductInCart = (idProduct) => {
-        const productsFilter = cart.filter((productCart)=> productCart.id !== idProduct )
-        setCart(productsFilter)
+        commitCart(
+            cartRef.current.filter(
+                (cartProduct) => String(cartProduct.id) !== String(idProduct)
+            )
+        )
     }
 
-    const totalQuantity = ()=>{
-    const quantity = cart.reduce( (total, productCart)=> total + productCart.quantity, 0 )
-        return quantity
-    }
-    
-    const totalPriceCart = ()=>{
-        const price = cart.reduce((total, productCart) => total + (productCart.precio * productCart.quantity), 0)
-            return price
-        }
-    
-    const deleteCart = ()=>{
-        setCart([])
-    }
-    const isInCart = (idProduct)=>{
-        const checkCart = cart.some(CartProduct => CartProduct.id === idProduct)
-        return checkCart
-        
+    const deleteCart = () => {
+        commitCart([])
     }
 
+    const totalQuantity = () =>
+        cart.reduce((total, cartProduct) => total + Number(cartProduct.quantity || 0), 0)
 
-    return(
-        <CartContext.Provider value={ { cart, addProductInCart, totalQuantity, totalPriceCart, deleteProductInCart, deleteCart, setMessageToast, isInCart } }>
+    const totalPriceCart = () =>
+        cart.reduce(
+            (total, cartProduct) =>
+                total + Number(cartProduct.precio || 0) * Number(cartProduct.quantity || 0),
+            0
+        )
+
+    const contextValue = useMemo(
+        () => ({
+            cart,
+            addProductInCart,
+            totalQuantity,
+            totalPriceCart,
+            deleteProductInCart,
+            deleteCart,
+            isInCart
+        }),
+        // The context value must change whenever the cart changes so consumers
+        // re-render. The handlers themselves always read the latest cart from
+        // cartRef, which also protects against very fast consecutive updates.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [cart]
+    )
+
+    return (
+        <CartContext.Provider value={contextValue}>
             {children}
         </CartContext.Provider>
     )

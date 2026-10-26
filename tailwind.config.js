@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'media',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -8,9 +9,9 @@ export default {
     extend: {
       colors: {
         'success-subtle': '#d1e7dd',
-        'seagreen':'#00916E',
+        'seagreen': '#00916E',
       },
-      scale:{
+      scale: {
         '101': '1.01',
         '102': '1.02',
         '103': '1.03'

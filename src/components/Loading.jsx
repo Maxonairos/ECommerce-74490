@@ -2,8 +2,8 @@ import { PacmanLoader } from "react-spinners"
 
 const Loading = () => {
   return (
-    <div className='m-10 flex justify-center max-w-9xl min-h-screen'>
-        <PacmanLoader size={100} color="#d1e7dd"/>
+    <div className="flex min-h-screen w-full items-center justify-center py-10">
+      <PacmanLoader size={100} color="#00916E" />
     </div>
   )
 }

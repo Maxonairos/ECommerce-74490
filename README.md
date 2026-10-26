@@ -13,6 +13,8 @@
 
 - [Acerca del Proyecto](#acerca-del-proyecto)
 - [Dependencias](#dependencias)
+- [Instalación y scripts](#instalación-y-scripts)
+- [Provincias y localidades](#provincias-y-localidades)
 - [Funcionalidades](#funcionalidades)
 - [Desarrollador](#desarrollador)
 
@@ -61,6 +63,91 @@
 <a href="https://es.react.dev/" target="_blank"> <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" width="50"/> </a>
 
 <a href="https://vercel.com/" target="_blank"> <img src="https://vercel.com/mktng/_next/static/media/vercel-logotype-light.700a8d26.svg" alt="Vercel" width="80"/> </a>
+
+## Instalación y scripts
+
+```bash
+npm install       # instala las dependencias
+npm run dev       # inicia el servidor de desarrollo
+npm run lint      # revisa el código con ESLint
+npm run build     # genera la versión de producción en dist/
+npm run preview   # previsualiza la versión de producción
+```
+
+La configuración de Firebase se puede sobrescribir con variables de entorno.
+Copiá `.env.example` como `.env.local` y completá los valores de tu proyecto.
+
+## Provincias y localidades
+
+El formulario de checkout carga las provincias argentinas y sus localidades desde la colección `provincias` de Firestore.
+
+Cada documento usa el ID oficial de Georef como ID del documento y contiene:
+
+- `id`: ID de la provincia en Georef.
+- `nombre`: nombre de la provincia.
+- `localidades`: array de localidades únicas, ordenadas alfabéticamente.
+- `totalLocalidades`: cantidad de localidades de la provincia.
+- `fuente`: origen de los datos (`Georef - datos.gob.ar`).
+- `actualizadoEn`: fecha ISO de la última actualización.
+
+Para regenerar la colección con los datos oficiales de [Georef](https://apis.datos.gob.ar/georef/api/) ejecutá:
+
+```bash
+npm run seed:locations
+```
+
+El script consulta la API, elimina localidades duplicadas y actualiza los 24 documentos de la colección.
+
+El checkout valida cada campo al salir del input y al enviar el formulario:
+
+- Nombre y apellido: solo letras, espacios, puntos, apóstrofes y guiones (2 a 50 caracteres).
+- Código de área: 2 a 4 dígitos; teléfono: 6 a 8 dígitos, ambos sin 0 ni 15.
+- Dirección, altura, piso y departamento con formatos acotados.
+- Provincia y localidad deben existir en Firestore y pertenecer a la misma jurisdicción.
+- Código postal: formato de 4 dígitos o CPA argentino (por ejemplo `X5011FEM`).
+- Email válido y confirmación de email coincidente.
+
+Si hay errores, se muestran debajo de cada campo y el foco pasa al primer campo inválido. El botón de compra permanece deshabilitado mientras no se pudieron cargar las ubicaciones.
+
+## Pagos con Mercado Pago
+
+El checkout puede iniciar un pago con Checkout Pro usando la API de `MP-NodeJS/mp`.
+
+1. Copiá la URL del backend en `.env.local` y en Vercel:
+
+   ```bash
+   VITE_MP_API_URL=https://<tu-proyecto>.vercel.app
+   ```
+
+2. Al confirmar la compra se crea la preferencia y se guarda la orden en Firestore con:
+
+   ```js
+   {
+     status: "pending",
+     paymentPreferenceId: "123456789-abcd-...", // ID del link de pago
+     paymentInitPoint: "https://www.mercadopago.com.ar/...",
+     paymentId: null
+   }
+   ```
+
+3. El usuario es redirigido a Mercado Pago. Al volver a `/checkout/resultado`, la app consulta el pago y actualiza la orden:
+
+   ```js
+   {
+     status: "paid", // paid | pending | rejected | cancelled | refunded
+     paymentId: "123456789", // número de pago
+     paymentStatus: "approved",
+     paymentStatusDetail: "accredited",
+     paymentMethod: "visa",
+     paymentAmount: 30000
+   }
+   ```
+
+> Si `VITE_MP_API_URL` está vacía, el checkout mantiene el comportamiento anterior: guarda la orden y muestra el número de seguimiento, sin iniciar el pago.
+
+> Si la API está configurada con credenciales de prueba (`TEST-`), se usa `checkoutUrl`, que abre el checkout de **sandbox** para pagar con usuarios de prueba.
+
+> Para que la orden se actualice al volver de Mercado Pago, las reglas de Firestore deben permitir `update` sobre `orders` (por ejemplo, solo los campos de pago). El detalle de la integración está en `MP-NodeJS/mp/docs/integracion-gamerstore.md`.
 
 ## Funcionalidades
 
