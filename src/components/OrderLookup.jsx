@@ -3,7 +3,7 @@ import { findOrderById, findOrderByPaymentId, findOrdersByDni } from "../api/ord
 
 const money = (value) => Number(value || 0).toLocaleString("es-AR", { style: "currency", currency: "ARS" })
 
-const OrderCard = ({ order, payment }) => (
+const OrderCard = ({ order, payment, showEmail }) => (
     <article className="rounded-lg border bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800">
         <h3 className="mb-3 break-all text-lg font-bold text-gray-800 dark:text-white">Orden {order.id}</h3>
         <dl className="grid grid-cols-1 gap-2 text-sm text-gray-700 dark:text-gray-200 sm:grid-cols-2">
@@ -15,6 +15,7 @@ const OrderCard = ({ order, payment }) => (
             <div><dt className="font-semibold">Preferencia MP</dt><dd className="break-all">{order.paymentPreferenceId || "Pendiente"}</dd></div>
             <div><dt className="font-semibold">Cliente</dt><dd>{order.buyer?.name} {order.buyer?.surname}</dd></div>
             <div><dt className="font-semibold">DNI</dt><dd>{order.buyer?.dni || "-"}</dd></div>
+            {showEmail && <div><dt className="font-semibold">Email</dt><dd className="break-all">{order.buyer?.email || "-"}</dd></div>}
             <div className="sm:col-span-2"><dt className="font-semibold">Total</dt><dd className="text-lg font-bold">{money(order.total)}</dd></div>
         </dl>
         <div className="mt-4 border-t pt-3 dark:border-gray-700">
@@ -31,6 +32,7 @@ const OrderLookup = () => {
     const [value, setValue] = useState("")
     const [orders, setOrders] = useState([])
     const [payment, setPayment] = useState(null)
+    const [lastSearchType, setLastSearchType] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
 
@@ -45,6 +47,7 @@ const OrderLookup = () => {
         setError("")
         setOrders([])
         setPayment(null)
+        setLastSearchType(type)
         try {
             if (type === "dni") {
                 const result = await findOrdersByDni(input)
@@ -83,7 +86,7 @@ const OrderLookup = () => {
                 </form>
                 {error && <p className="mt-4 rounded-md bg-red-50 p-3 text-red-700 dark:bg-red-950/40 dark:text-red-200" role="alert">{error}</p>}
             </section>
-            {orders.map((order) => <OrderCard key={order.id} order={order} payment={payment} />)}
+            {orders.map((order) => <OrderCard key={order.id} order={order} payment={payment} showEmail={lastSearchType === "dni"} />)}
         </div>
     )
 }
