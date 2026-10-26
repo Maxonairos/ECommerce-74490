@@ -12,10 +12,11 @@ import { getPayment, isMercadoPagoEnabled } from "./mercadopago.js"
 
 const serializeOrder = (snapshot) => ({ id: snapshot.id, ...snapshot.data() })
 
-export const findOrdersByDni = async (dni) => {
+export const findOrdersByDni = async (dni, email) => {
     const ordersQuery = query(
         collection(db, "orders"),
         where("buyer.dni", "==", dni),
+        where("buyer.email", "==", email.toLowerCase()),
         limit(20)
     )
     const result = await getDocs(ordersQuery)

@@ -161,9 +161,11 @@ La ruta `/consulta-compra` permite consultar una orden por:
 - Número de operación de Mercado Pago.
 - ID de la orden de Gamerstore.
 
+Cuando la búsqueda es por DNI también se solicita el email usado en la compra. La consulta a Firestore filtra por ambos datos, por lo que no se muestran órdenes ni datos personales solamente conociendo un DNI. En todos los tipos de búsqueda el resultado muestra el email asociado a la orden.
+
 El resultado muestra los productos, comprador, total, estado de la orden, estado y detalle del pago, número de operación y preferencia de Mercado Pago.
 
-> La consulta por DNI es una búsqueda pública. Para producción conviene agregar un segundo dato de verificación, como email o código de seguimiento, antes de mostrar datos personales y de la compra.
+> La consulta por DNI requiere el DNI y el email exactos que fueron guardados en la orden.
 
 ## Funcionalidades
 

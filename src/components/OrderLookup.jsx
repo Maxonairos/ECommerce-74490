@@ -3,7 +3,7 @@ import { findOrderById, findOrderByPaymentId, findOrdersByDni } from "../api/ord
 
 const money = (value) => Number(value || 0).toLocaleString("es-AR", { style: "currency", currency: "ARS" })
 
-const OrderCard = ({ order, payment, showEmail }) => (
+const OrderCard = ({ order, payment }) => (
     <article className="rounded-lg border bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800">
         <h3 className="mb-3 break-all text-lg font-bold text-gray-800 dark:text-white">Orden {order.id}</h3>
         <dl className="grid grid-cols-1 gap-2 text-sm text-gray-700 dark:text-gray-200 sm:grid-cols-2">
@@ -15,7 +15,7 @@ const OrderCard = ({ order, payment, showEmail }) => (
             <div><dt className="font-semibold">Preferencia MP</dt><dd className="break-all">{order.paymentPreferenceId || "Pendiente"}</dd></div>
             <div><dt className="font-semibold">Cliente</dt><dd>{order.buyer?.name} {order.buyer?.surname}</dd></div>
             <div><dt className="font-semibold">DNI</dt><dd>{order.buyer?.dni || "-"}</dd></div>
-            {showEmail && <div><dt className="font-semibold">Email</dt><dd className="break-all">{order.buyer?.email || "-"}</dd></div>}
+            <div><dt className="font-semibold">Email</dt><dd className="break-all">{order.buyer?.email || "-"}</dd></div>
             <div className="sm:col-span-2"><dt className="font-semibold">Total</dt><dd className="text-lg font-bold">{money(order.total)}</dd></div>
         </dl>
         <div className="mt-4 border-t pt-3 dark:border-gray-700">
@@ -32,7 +32,7 @@ const OrderLookup = () => {
     const [value, setValue] = useState("")
     const [orders, setOrders] = useState([])
     const [payment, setPayment] = useState(null)
-    const [lastSearchType, setLastSearchType] = useState(null)
+    const [email, setEmail] = useState("")
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
 
@@ -40,17 +40,18 @@ const OrderLookup = () => {
         event.preventDefault()
         const input = value.trim()
         if (!input) return setError("Ingresá un dato para buscar.")
+        const normalizedEmail = email.trim().toLowerCase()
         if (type === "dni" && !/^\d{7,8}$/.test(input)) return setError("El DNI debe tener entre 7 y 8 dígitos.")
+        if (type === "dni" && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(normalizedEmail)) return setError("Ingresá un email válido para verificar el DNI.")
         if (type === "payment" && !/^\d{1,20}$/.test(input)) return setError("El número de operación debe contener solo números.")
 
         setLoading(true)
         setError("")
         setOrders([])
         setPayment(null)
-        setLastSearchType(type)
         try {
             if (type === "dni") {
-                const result = await findOrdersByDni(input)
+                const result = await findOrdersByDni(input, normalizedEmail)
                 if (result.length === 0) setError("No encontramos compras asociadas a ese DNI.")
                 setOrders(result)
             } else if (type === "order") {
@@ -75,18 +76,19 @@ const OrderLookup = () => {
             <section className="rounded-lg border bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
                 <h1 className="mb-2 text-2xl font-bold text-gray-800 dark:text-white">Consultar compra</h1>
                 <p className="mb-5 text-gray-600 dark:text-gray-300">Buscá tus datos por DNI, número de operación de Mercado Pago o número de orden.</p>
-                <form onSubmit={handleSubmit} className="grid gap-3 sm:grid-cols-[auto_1fr_auto]">
+                <form onSubmit={handleSubmit} className="grid gap-3 sm:grid-cols-[auto_1fr_1fr_auto]">
                     <select className="rounded-md bg-gray-100 p-3 text-gray-800 dark:bg-gray-700 dark:text-white" value={type} onChange={(event) => setType(event.target.value)}>
                         <option value="dni">DNI</option>
                         <option value="payment">Operación Mercado Pago</option>
                         <option value="order">ID de orden</option>
                     </select>
                     <input className="rounded-md bg-gray-100 p-3 text-gray-800 dark:bg-gray-700 dark:text-white" value={value} onChange={(event) => setValue(event.target.value)} placeholder={type === "dni" ? "30123456" : type === "payment" ? "Número de operación" : "ID de orden"} />
+                    {type === "dni" && <input type="email" className="rounded-md bg-gray-100 p-3 text-gray-800 dark:bg-gray-700 dark:text-white" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email usado en la compra" autoComplete="email" required />}
                     <button className="rounded-md bg-green-600 px-5 py-3 font-semibold text-white hover:bg-green-700 disabled:opacity-60" disabled={loading}>{loading ? "Buscando..." : "Buscar"}</button>
                 </form>
                 {error && <p className="mt-4 rounded-md bg-red-50 p-3 text-red-700 dark:bg-red-950/40 dark:text-red-200" role="alert">{error}</p>}
             </section>
-            {orders.map((order) => <OrderCard key={order.id} order={order} payment={payment} showEmail={lastSearchType === "dni"} />)}
+            {orders.map((order) => <OrderCard key={order.id} order={order} payment={payment} />)}
         </div>
     )
 }
